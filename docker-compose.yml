@@ -1,0 +1,41 @@
+version: '3'
+services:
+  app-gateway:
+    image: moviegatewayimage
+    ports:
+      - '3100:3100'
+    depends_on:
+      - movies
+    networks:
+      - my-network
+  movies:
+    image: moviesimage
+    ports:
+      - '3103:3103'
+    depends_on:
+      - userms
+      - playlists
+      - actors
+    networks:
+      - my-network
+  userms:
+    image: usermsimage
+    ports:
+      - '3101:3101'
+    networks:
+      - my-network
+  playlists:
+    image: playlistssimage
+    ports:
+      - '3102:3102'
+    networks:
+      - my-network
+  actors:
+    image: actorsimage
+    ports:
+      - '3104:3104'
+    networks:
+      - my-network
+
+networks:
+  my-network:
